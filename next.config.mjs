@@ -8,7 +8,12 @@ const nextConfig = {
     return [
       {
         source: "/dashboard",
-        destination: "/dashboard/default",
+        destination: "/dimension-insight",
+        permanent: false,
+      },
+      {
+        source: "/dashboard/:path*",
+        destination: "/dimension-insight",
         permanent: false,
       },
     ];
