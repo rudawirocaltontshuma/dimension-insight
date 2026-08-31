@@ -148,21 +148,21 @@ Contributions are welcome. Feel free to open issues, feature requests, or start 
 ---
 ---
 
-# NEXORA INSIGHT
+# DIMENSION INSIGHT
 
 **Business Intelligence & Executive Analytics Platform**
 
 > [!IMPORTANT]
-> **Frontend demonstration using fictional data.** NEXORA INSIGHT has no backend, no database, no
+> **Frontend demonstration using fictional data.** DIMENSION INSIGHT has no backend, no database, no
 > authentication and no external integrations. Every number, customer, product, employee and report in it
 > is generated locally by TypeScript modules from a fixed seed. Nothing here represents a real business.
 
-NEXORA INSIGHT is a portfolio project built inside this repository as a self-contained module. It lives under
-the `/nexora` route prefix with its own application shell, so it sits alongside the template's existing
+DIMENSION INSIGHT is a portfolio project built inside this repository as a self-contained module. It lives under
+the `/dimension-insight` route prefix with its own application shell, so it sits alongside the template's existing
 `/dashboard` screens without replacing them.
 
-**Entry point:** [`/nexora`](http://localhost:3000/nexora) — the platform overview — or
-[`/nexora/dashboard`](http://localhost:3000/nexora/dashboard) for the executive dashboard.
+**Entry point:** [`/dimension-insight`](http://localhost:3000/dimension-insight) — the platform overview — or
+[`/dimension-insight/dashboard`](http://localhost:3000/dimension-insight/dashboard) for the executive dashboard.
 
 ## Project Overview
 
@@ -200,7 +200,7 @@ The project follows this repository's colocation convention. Route-specific code
 shared platform code lives one level up.
 
 ```
-src/app/nexora/
+src/app/dimension-insight/
 ├── layout.tsx                    Sidebar + header shell for the whole platform
 ├── page.tsx                      Portfolio showcase / platform overview
 ├── _lib/navigation.ts            Single source of truth for the nav tree
@@ -219,7 +219,7 @@ src/app/nexora/
 ├── analytics/                    Overview + sales, finance, customers, operations, marketing, workforce
 ├── performance/  kpis/  data-explorer/  report-builder/
 ├── reports/  reports/[id]/  alerts/  saved-views/  settings/
-└── src/data/nexora/              The mock data layer (see below)
+└── src/data/dimension-insight/              The mock data layer (see below)
 ```
 
 ## Technology
@@ -274,12 +274,12 @@ both in the header and in Settings → Appearance.
 
 Reuse is deliberate: one `KpiCard` powers every KPI across all modules, one `ChartCard` frames every
 visualisation, one chart wrapper module serves all ten chart types, and two table layers cover every grid —
-`NexoraDataTable` for typed columns with custom cells, and `QuickTable` for declarative column specs. Pages
+`DimensionInsightDataTable` for typed columns with custom cells, and `QuickTable` for declarative column specs. Pages
 stay as Server Components; only genuinely interactive pieces are client components.
 
 ## Mock Data Disclaimer
 
-All data is fictional and generated in the browser and at build time by `src/data/nexora/`:
+All data is fictional and generated in the browser and at build time by `src/data/dimension-insight/`:
 
 | Module | Purpose |
 | --- | --- |
@@ -296,7 +296,7 @@ saving a view or a report draft — raise a toast and change local state only.
 
 ## Portfolio Purpose
 
-NEXORA INSIGHT is project #8 in a professional portfolio and exists to demonstrate front-end engineering at
+DIMENSION INSIGHT is project #8 in a professional portfolio and exists to demonstrate front-end engineering at
 enterprise scale: information hierarchy across a large module surface, dashboard and data-visualisation
 architecture, advanced table interaction, drill-down and exploration interfaces, disciplined component reuse,
 responsive behaviour from wide desktop to small mobile, and full light and dark theming — all with a
