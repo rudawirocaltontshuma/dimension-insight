@@ -1,71 +1,66 @@
-# Contributing to Studio Admin
+# Contributing to Dimension Insight
 
-Thanks for showing interest in improving **Studio Admin** (repo: `next-shadcn-admin-dashboard`).  
-This guide will help you set up your environment and understand how to contribute.
+Thanks for your interest in improving Dimension Insight. This guide covers how to set up your environment
+and where things live in this codebase.
 
 ---
 
 ## Overview
 
-This project is built with **Next.js 16**, **TypeScript**, **Tailwind CSS v4**, and **Shadcn UI**.  
-The goal is to keep the codebase modular, scalable, and easy to extend.
+Dimension Insight is built with **Next.js**, **TypeScript**, **Tailwind CSS**, and **shadcn/ui**. The goal
+is to keep the codebase modular, scalable, and easy to extend.
 
 ---
 
 ## Project Layout
 
-We use a **colocation-based file system**. Each feature keeps its own pages, components, and logic.
+The project uses a **colocation-based file system**: each route keeps its own page, components, and logic
+next to it, while shared code lives one level up.
 
 ```
 src
-├── app               # Next.js routes (App Router)
-│   ├── (auth)        # Auth layouts & screens
-│   ├── (main)        # Main dashboard routes
-│   │   └── (dashboard)
-│   │       ├── crm
-│   │       ├── finance
-│   │       ├── default
-│   │       └── ...
-│   └── layout.tsx
-├── components        # Shared UI components
-├── hooks             # Reusable hooks
-├── lib               # Config & utilities
-├── styles            # Tailwind / theme setup
-└── types             # TypeScript definitions
+├── app
+│   ├── dimension-insight     # The application: routes, shared shell, shared components
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   ├── _lib/              # Navigation config
+│   │   ├── _components/       # Shared across every module (charts, tables, header, sidebar, search…)
+│   │   ├── dashboard/
+│   │   ├── analytics/
+│   │   ├── performance/  kpis/  data-explorer/  report-builder/
+│   │   └── reports/  reports/[id]/  alerts/  saved-views/  settings/
+│   └── (main)/auth           # Auth screens
+├── data
+│   └── dimension-insight     # The mock data layer (seeded, deterministic generators)
+├── components/ui             # shadcn/ui primitives
+├── hooks                     # Reusable hooks
+├── lib                       # Config & utilities
+├── stores                    # Preference store (theme, layout)
+└── styles                    # Tailwind / theme setup
 ```
-
-If you’d like a more detailed example of this setup, check out the [Next Colocation Template](https://github.com/arhamkhnz/next-colocation-template), where the full structure is explained with examples.
 
 ---
 
 ## Getting Started
 
-### Fork and Clone the Repository
+### Fork and clone the repository
 
-1. Fork the Repository
-   
-   Click [here](https://github.com/arhamkhnz/next-shadcn-admin-dashboard/fork) to fork the repository.
-
-2. Clone the Repository  
+1. Fork the repository, then clone your fork:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/next-shadcn-admin-dashboard.git
-   ```
-   
-3. Navigate into the Project  
-   ```bash
-   cd next-shadcn-admin-dashboard
+   git clone https://github.com/YOUR_USERNAME/business_intelligence_platform.git
+   cd business_intelligence_platform
    ```
 
-4. **Install dependencies**
+2. Install dependencies:
    ```bash
    npm install
    ```
 
-5. **Run the dev server**
+3. Run the dev server:
    ```bash
    npm run dev
    ```
-   App will be available at [http://localhost:3000](http://localhost:3000).
+   The app runs at [http://localhost:3000](http://localhost:3000) and redirects into `/dimension-insight`.
 
 ---
 
@@ -76,58 +71,67 @@ If you’d like a more detailed example of this setup, check out the [Next Coloc
   git checkout -b feature/my-update
   ```
 
-- Use clear commit messages:
+- Use clear, conventional commit messages:
   ```bash
-  git commit -m "feat: add finance dashboard screen"
+  git commit -m "feat: add churn cohort chart to customer analytics"
   ```
 
-- Open a Pull Request once ready.
-- If your change adds a new UI screen or component, include a screenshot in your PR description.
+- Open a pull request once ready. If your change adds a new screen or visible component, include a
+  screenshot in the PR description.
 
 ---
 
 ## Where to Contribute
 
-- **External Pages**: Landing pages or other non-dashboard routes → `src/app/(external)/`  
-- **Auth Screens**: Login, register, and authentication layouts → `src/app/(main)/auth/`  
-- **Dashboard Screens**: Feature dashboards like CRM, Finance, Analytics → `src/app/(main)/dashboard/`
-- **Components**: Reusable UI goes in `src/components/`  
-- **Hooks**: Custom logic goes in `src/hooks/`  
-- **Themes**: New presets under `src/styles/presets/`  
-- **Dimension Insight**: The Business Intelligence & Executive Analytics Platform demo lives entirely under
-  `src/app/dimension-insight/` (routes, layout, shared `_components/`) and `src/data/dimension-insight/`
-  (the seeded mock data layer). It is a self-contained, frontend-only module — see the "DIMENSION INSIGHT"
-  section of the root `README.md` for its architecture. Keep any changes to it local to those two
-  directories, and keep new mock data deterministic (generated from `random.ts`'s seeded PRNG) so figures
-  stay consistent across every screen.
+- **Modules and routes** — new or updated screens go in `src/app/dimension-insight/<module>/`, following the
+  existing colocation pattern (`_components/` for route-local pieces).
+- **Shared platform components** — charts, tables, the KPI card, the header/sidebar shell, and the command
+  menu live in `src/app/dimension-insight/_components/`. Extend these rather than creating parallel
+  one-off implementations.
+- **Mock data** — everything under `src/data/dimension-insight/`. Keep new data **deterministic**: derive it
+  from the seeded `mulberry32` PRNG in `random.ts` rather than `Math.random()`, so the dataset stays
+  reproducible and every module's figures keep reconciling with one another.
+- **shadcn/ui primitives** — `src/components/ui/`. Add new primitives via the shadcn CLI rather than hand
+  authoring, to stay consistent with the rest of the kit.
+- **Theming / preferences** — `src/stores/preferences/` and `src/lib/preferences/`.
 
 ---
 
 ## Guidelines
 
-- Prefer **TypeScript types** over `any`
-- Husky pre-commit hooks are enabled - linting and formatting run automatically when you commit, and if there are errors the commit will be blocked until they are fixed. 
-- Follow **Shadcn UI** style & Tailwind v4 conventions
-- Keep accessibility in mind (ARIA, keyboard nav)
-- Use clear commit messages with conventional prefixes (`feat:`, `fix:`, `chore:`, etc.)
-- Avoid unnecessary dependencies — prefer existing utilities where possible
+- Prefer **TypeScript types** over `any`.
+- Husky pre-commit hooks are enabled — linting and formatting run automatically on commit, and the commit is
+  blocked until any errors are fixed.
+- Follow the existing **shadcn/ui** and Tailwind conventions already used across the app.
+- Keep accessibility in mind (ARIA, keyboard navigation).
+- No backend, database, authentication, or external network calls — this stays a frontend application over
+  generated data. Interactions that would normally persist somewhere (saving a view, exporting a report,
+  acknowledging an alert) should update local state and show a toast, not attempt to write anywhere real.
+- Avoid unnecessary dependencies — prefer what's already in the project.
+
+---
+
+## Verifying your change
+
+Before opening a PR, run:
+
+```bash
+npx tsc --noEmit
+npm run lint
+npm run build
+```
+
+All three should complete without errors.
 
 ---
 
 ## Submitting PRs
 
-- Open a Pull Request once your changes are ready.  
-- Ensure your branch is up to date with `main` before submitting.  
-- Reference any related issue in your PR for context.
+- Ensure your branch is up to date with `main` before submitting.
+- Reference any related issue in your PR description for context.
 
 ---
 
 ## Questions & Support
 
-- Report bugs, suggestions, or issues via [GitHub Issues](https://github.com/arhamkhnz/next-shadcn-admin-dashboard/issues)
-
----
-
-Your contributions keep this project growing. 🚀
-
-**Happy Vibe Coding!**
+Report bugs, suggestions, or questions via [GitHub Issues](https://github.com/rudawirocaltontshuma/business_intelligence_platform/issues).

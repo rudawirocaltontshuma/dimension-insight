@@ -3,12 +3,12 @@ import packageJson from "../../package.json";
 const currentYear = new Date().getFullYear();
 
 export const APP_CONFIG = {
-  name: "Studio Admin",
+  name: "Dimension Insight",
   version: packageJson.version,
-  copyright: `© ${currentYear}, Studio Admin.`,
+  copyright: `© ${currentYear}, Dimension Insight.`,
   meta: {
-    title: "Studio Admin - Modern Next.js Dashboard Starter Template",
+    title: "Dimension Insight — Business Intelligence & Executive Analytics Platform",
     description:
-      "Studio Admin is a modern, open-source dashboard starter template built with Next.js 16, Tailwind CSS v4, and shadcn/ui. Perfect for SaaS apps, admin panels, and internal tools—fully customizable and production-ready.",
+      "Dimension Insight is a business intelligence and executive analytics platform built with Next.js, TypeScript, Tailwind CSS and shadcn/ui — executive dashboards, analytics workspaces, a KPI centre, a data explorer, a report builder and more, on generated mock data.",
   },
 };
