@@ -94,6 +94,12 @@ If you’d like a more detailed example of this setup, check out the [Next Coloc
 - **Components**: Reusable UI goes in `src/components/`  
 - **Hooks**: Custom logic goes in `src/hooks/`  
 - **Themes**: New presets under `src/styles/presets/`  
+- **Dimension Insight**: The Business Intelligence & Executive Analytics Platform demo lives entirely under
+  `src/app/dimension-insight/` (routes, layout, shared `_components/`) and `src/data/dimension-insight/`
+  (the seeded mock data layer). It is a self-contained, frontend-only module — see the "DIMENSION INSIGHT"
+  section of the root `README.md` for its architecture. Keep any changes to it local to those two
+  directories, and keep new mock data deterministic (generated from `random.ts`'s seeded PRNG) so figures
+  stay consistent across every screen.
 
 ---
 
