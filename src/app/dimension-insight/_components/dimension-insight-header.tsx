@@ -5,7 +5,6 @@ import Link from "next/link";
 import { CircleUser, LifeBuoy } from "lucide-react";
 import { toast } from "sonner";
 
-import { ThemeSwitcher } from "@/app/(main)/dashboard/_components/header/theme-switcher";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -22,6 +21,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 
 import { DIMENSION_INSIGHT_BASE } from "../_lib/navigation";
 import { GlobalSearch } from "./global-search";
+import { ThemeSwitcher } from "./theme-switcher";
 
 export function DimensionInsightHeader() {
   return (
